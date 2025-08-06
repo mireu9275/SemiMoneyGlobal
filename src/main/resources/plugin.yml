@@ -1,0 +1,11 @@
+name: SemiMoneyGlobal
+main: kr.eme.semiMoneyGlobal.SemiMoneyGlobal
+version: 1.0
+api-version: 1.21
+commands:
+  money:
+    usage: /money or /돈
+    aliases: 돈
+  cheque:
+    usage: /cheque or /수표
+    aliases: 수표

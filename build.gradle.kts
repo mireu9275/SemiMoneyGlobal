@@ -5,10 +5,9 @@ plugins {
 }
 
 group = "kr.eme.semiMoneyGlobal"
-version = "1.0-SNAPSHOT"
+version = "1.0.0" //
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
 }
@@ -26,14 +25,6 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
-//tasks.jar {
-//    archiveFileName = "${project.name}-${project.version}.jar"
-//    destinationDirectory = file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins")
-//    manifest {
-//        attributes["main-Class"] = "kr.eme.semiMoneyGlobal.SemiMoneyGlobal"
-//    }
-//}
-
 tasks {
     shadowJar {
         archiveBaseName.set(project.name)
@@ -41,7 +32,7 @@ tasks {
         archiveClassifier.set("")
         destinationDirectory.set(file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins"))
         manifest {
-            attributes["main-Class"] = "kr.eme.semiMoneyGlobal.SemiMoneyGlobal"
+            attributes["Main-Class"] = "kr.eme.semiMoneyGlobal.SemiMoneyGlobal"
         }
     }
     build {

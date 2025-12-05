@@ -65,4 +65,13 @@ object MoneyLogManager {
     fun getTotalEarned(): Int {
         return logList.sumOf { it.amount }
     }
+
+    /**
+     * 특정 플레이어의 누적 획득 EP 계산 (양수 금액만 합산)
+     */
+    fun getPlayerTotalEarned(playerName: String): Int {
+        return logList
+            .filter { it.player == playerName && it.amount > 0 } // 해당 플레이어의 '획득' 기록만 필터링
+            .sumOf { it.amount }
+    }
 }

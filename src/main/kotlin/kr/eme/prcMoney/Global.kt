@@ -1,4 +1,4 @@
-package kr.eme.semiMoneyGlobal
+package kr.eme.prcMoney
 
 import org.bukkit.plugin.java.JavaPlugin
 

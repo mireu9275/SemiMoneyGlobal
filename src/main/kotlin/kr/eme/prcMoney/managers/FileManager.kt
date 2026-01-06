@@ -1,4 +1,4 @@
-package kr.eme.semiMoneyGlobal.managers
+package kr.eme.prcMoney.managers
 
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File

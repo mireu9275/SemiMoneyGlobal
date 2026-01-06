@@ -1,1 +1,1 @@
-rootProject.name = "SemiMoneyGlobal"
+rootProject.name = "PRCMoney"

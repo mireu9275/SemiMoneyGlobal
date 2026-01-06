@@ -1,6 +1,6 @@
-package kr.eme.semiMoneyGlobal.commands
+package kr.eme.prcMoney.commands
 
-import kr.eme.semiMoneyGlobal.main
+import kr.eme.prcMoney.main
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.command.Command

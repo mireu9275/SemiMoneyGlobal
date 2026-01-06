@@ -1,7 +1,7 @@
-package kr.eme.semiMoneyGlobal.listeners
+package kr.eme.prcMoney.listeners
 
-import kr.eme.semiMoneyGlobal.main
-import kr.eme.semiMoneyGlobal.managers.MoneyManager
+import kr.eme.prcMoney.main
+import kr.eme.prcMoney.managers.MoneyManager
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler

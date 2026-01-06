@@ -1,7 +1,7 @@
-package kr.eme.semiMoneyGlobal.commands
+package kr.eme.prcMoney.commands
 
-import kr.eme.semiMoneyGlobal.managers.MoneyLogManager
-import kr.eme.semiMoneyGlobal.managers.MoneyManager
+import kr.eme.prcMoney.managers.MoneyLogManager
+import kr.eme.prcMoney.managers.MoneyManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

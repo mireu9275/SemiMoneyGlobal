@@ -1,5 +1,5 @@
-name: SemiMoneyGlobal
-main: kr.eme.semiMoneyGlobal.SemiMoneyGlobal
+name: PRCMoney
+main: kr.eme.prcMoney.PRCMoney
 version: 1.0
 api-version: 1.21
 commands:

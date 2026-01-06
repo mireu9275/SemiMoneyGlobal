@@ -1,4 +1,4 @@
-package kr.eme.semiMoneyGlobal.managers
+package kr.eme.prcMoney.managers
 
 import kr.eme.semiMission.api.events.MissionEvent
 import kr.eme.semiMission.enums.MissionVersion

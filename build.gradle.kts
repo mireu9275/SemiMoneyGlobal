@@ -4,7 +4,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "kr.eme.semiMoneyGlobal"
+group = "kr.eme.prcMoney"
 version = "1.0.1"
 
 repositories {
@@ -35,7 +35,7 @@ tasks {
         archiveClassifier.set("")
         destinationDirectory.set(file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins"))
         manifest {
-            attributes["Main-Class"] = "kr.eme.semiMoneyGlobal.SemiMoneyGlobal"
+            attributes["Main-Class"] = "kr.eme.prcMoney.PRCMoney"
         }
     }
     build {
@@ -46,7 +46,7 @@ tasks {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "kr.eme.semiMoneyGlobal"
+            groupId = "kr.eme.prcMoney"
             artifactId = project.name
             version = project.version.toString()
             from(components["kotlin"])

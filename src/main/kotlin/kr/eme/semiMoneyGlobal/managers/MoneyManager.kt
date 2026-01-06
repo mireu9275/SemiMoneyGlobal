@@ -65,23 +65,17 @@ object MoneyManager {
     fun addMoney(amount: Int, type: String, player: String = "SYSTEM") {
         money += amount
 
-        // 1. 로그를 먼저 저장해야 누적 금액에 반영됩니다.
         MoneyLogManager.log(player, type, amount) //
 
         val playerObj = Bukkit.getPlayer(player)
 
-        // 플레이어가 오프라인이면 이벤트 처리를 할 필요가 없으므로 리턴
         if (playerObj == null || !playerObj.isOnline) return
 
-        // 2. 로그 매니저를 통해 '현재까지의 총 누적 금액'을 가져옵니다.
         val currentTotalEarned = MoneyLogManager.getPlayerTotalEarned(player)
 
-        // 3. '방금 들어온 금액'을 빼서 '이전 누적 금액'을 역산합니다.
         val previousTotalEarned = currentTotalEarned - amount
 
-        // 4. 반복문으로 미션 달성 여부 체크 (중복 코드 제거)
         for ((threshold, version) in missionMilestones) {
-            // "이전에는 목표치 미만이었는데" && "지금 목표치를 넘겼다면" -> 달성
             if (previousTotalEarned < threshold && currentTotalEarned >= threshold) {
                 Bukkit.getPluginManager().callEvent(
                     MissionEvent(

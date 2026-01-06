@@ -12,6 +12,7 @@ object MoneyManager {
     private var money: Int = 0
 
     private val missionMilestones = listOf(
+
         300_000 to MissionVersion.V1,
         500_000 to MissionVersion.V1,
         2_000_000 to MissionVersion.V2,

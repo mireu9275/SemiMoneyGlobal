@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "kr.eme.prcMoney"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    compileOnly("com.github.mireu9275:semiMission:v1.0.5")
+    compileOnly("com.github.mireu9275:PRCMission:v1.0.7")
 }
 
 kotlin {

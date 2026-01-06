@@ -1,9 +1,9 @@
 package kr.eme.prcMoney.managers
 
-import kr.eme.semiMission.api.events.MissionEvent
-import kr.eme.semiMission.enums.MissionVersion
-import kr.eme.semiMission.objects.const.MissionTargets
-import kr.eme.semiMission.objects.const.MissionTypes
+import kr.eme.prcMission.api.events.MissionEvent
+import kr.eme.prcMission.enums.MissionVersion
+import kr.eme.prcMission.objects.const.MissionTargets
+import kr.eme.prcMission.objects.const.MissionTypes
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player

@@ -1,0 +1,207 @@
+diff --git a/.idea/.name b/.idea/.name
+new file mode 100644
+index 0000000..e0189e3
+--- /dev/null
++++ b/.idea/.name
+@@ -0,0 +1 @@
++PRCMoney
+\ No newline at end of file
+diff --git a/build.gradle.kts b/build.gradle.kts
+index da5e98c..b8825cf 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -4,7 +4,7 @@ plugins {
+     id("maven-publish")
+ }
+ 
+-group = "kr.eme.semiMoneyGlobal"
++group = "kr.eme.prcMoney"
+ version = "1.0.1"
+ 
+ repositories {
+@@ -35,7 +35,7 @@ tasks {
+         archiveClassifier.set("")
+         destinationDirectory.set(file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins"))
+         manifest {
+-            attributes["Main-Class"] = "kr.eme.semiMoneyGlobal.SemiMoneyGlobal"
++            attributes["Main-Class"] = "kr.eme.prcMoney.PRCMoney"
+         }
+     }
+     build {
+@@ -46,7 +46,7 @@ tasks {
+ publishing {
+     publications {
+         create<MavenPublication>("maven") {
+-            groupId = "kr.eme.semiMoneyGlobal"
++            groupId = "kr.eme.prcMoney"
+             artifactId = project.name
+             version = project.version.toString()
+             from(components["kotlin"])
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+index c3fe376..f04e45d 100644
+--- a/settings.gradle.kts
++++ b/settings.gradle.kts
+@@ -1 +1 @@
+-rootProject.name = "SemiMoneyGlobal"
+\ No newline at end of file
++rootProject.name = "PRCMoney"
+\ No newline at end of file
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/Global.kt b/src/main/kotlin/kr/eme/prcMoney/Global.kt
+similarity index 72%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/Global.kt
+rename to src/main/kotlin/kr/eme/prcMoney/Global.kt
+index fd4b244..cbe7ec2 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/Global.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/Global.kt
+@@ -1,4 +1,4 @@
+-package kr.eme.semiMoneyGlobal
++package kr.eme.prcMoney
+ 
+ import org.bukkit.plugin.java.JavaPlugin
+ 
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/SemiMoneyGlobal.kt b/src/main/kotlin/kr/eme/prcMoney/PRCMoney.kt
+similarity index 58%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/SemiMoneyGlobal.kt
+rename to src/main/kotlin/kr/eme/prcMoney/PRCMoney.kt
+index 88c0101..536a198 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/SemiMoneyGlobal.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/PRCMoney.kt
+@@ -1,13 +1,13 @@
+-package kr.eme.semiMoneyGlobal
++package kr.eme.prcMoney
+ 
+-import kr.eme.semiMoneyGlobal.commands.MoneyCommand
+-import kr.eme.semiMoneyGlobal.listeners.ChequeListener
+-import kr.eme.semiMoneyGlobal.managers.FileManager
+-import kr.eme.semiMoneyGlobal.managers.MoneyLogManager
+-import kr.eme.semiMoneyGlobal.managers.MoneyManager
++import kr.eme.prcMoney.commands.MoneyCommand
++import kr.eme.prcMoney.listeners.ChequeListener
++import kr.eme.prcMoney.managers.FileManager
++import kr.eme.prcMoney.managers.MoneyLogManager
++import kr.eme.prcMoney.managers.MoneyManager
+ import org.bukkit.plugin.java.JavaPlugin
+ 
+-class SemiMoneyGlobal : JavaPlugin() {
++class PRCMoney : JavaPlugin() {
+     override fun onEnable() {
+         main = this
+         FileManager.init(dataFolder)
+@@ -15,12 +15,12 @@ class SemiMoneyGlobal : JavaPlugin() {
+         MoneyLogManager.load()
+         registerCommands()
+         registerEvents()
+-        logger.info("SemiMoneyGlobal Enabled")
++        logger.info("PRCMoney Enabled")
+     }
+     override fun onDisable() {
+         MoneyManager.save()
+         MoneyLogManager.save()
+-        logger.info { "SemiMoneyGlobal Disabled" }
++        logger.info { "PRCMoney Disabled" }
+     }
+ 
+     private fun registerCommands() {
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/commands/ChequeCommand.kt b/src/main/kotlin/kr/eme/prcMoney/commands/ChequeCommand.kt
+similarity index 96%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/commands/ChequeCommand.kt
+rename to src/main/kotlin/kr/eme/prcMoney/commands/ChequeCommand.kt
+index 04cbdd6..a64097f 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/commands/ChequeCommand.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/commands/ChequeCommand.kt
+@@ -1,6 +1,6 @@
+-package kr.eme.semiMoneyGlobal.commands
++package kr.eme.prcMoney.commands
+ 
+-import kr.eme.semiMoneyGlobal.main
++import kr.eme.prcMoney.main
+ import org.bukkit.Material
+ import org.bukkit.NamespacedKey
+ import org.bukkit.command.Command
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/commands/MoneyCommand.kt b/src/main/kotlin/kr/eme/prcMoney/commands/MoneyCommand.kt
+similarity index 93%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/commands/MoneyCommand.kt
+rename to src/main/kotlin/kr/eme/prcMoney/commands/MoneyCommand.kt
+index 330a4a7..8108697 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/commands/MoneyCommand.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/commands/MoneyCommand.kt
+@@ -1,7 +1,7 @@
+-package kr.eme.semiMoneyGlobal.commands
++package kr.eme.prcMoney.commands
+ 
+-import kr.eme.semiMoneyGlobal.managers.MoneyLogManager
+-import kr.eme.semiMoneyGlobal.managers.MoneyManager
++import kr.eme.prcMoney.managers.MoneyLogManager
++import kr.eme.prcMoney.managers.MoneyManager
+ import org.bukkit.command.Command
+ import org.bukkit.command.CommandExecutor
+ import org.bukkit.command.CommandSender
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/listeners/ChequeListener.kt b/src/main/kotlin/kr/eme/prcMoney/listeners/ChequeListener.kt
+similarity index 90%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/listeners/ChequeListener.kt
+rename to src/main/kotlin/kr/eme/prcMoney/listeners/ChequeListener.kt
+index 40c1ead..95b7d65 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/listeners/ChequeListener.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/listeners/ChequeListener.kt
+@@ -1,7 +1,7 @@
+-package kr.eme.semiMoneyGlobal.listeners
++package kr.eme.prcMoney.listeners
+ 
+-import kr.eme.semiMoneyGlobal.main
+-import kr.eme.semiMoneyGlobal.managers.MoneyManager
++import kr.eme.prcMoney.main
++import kr.eme.prcMoney.managers.MoneyManager
+ import org.bukkit.Material
+ import org.bukkit.NamespacedKey
+ import org.bukkit.event.EventHandler
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/managers/FileManager.kt b/src/main/kotlin/kr/eme/prcMoney/managers/FileManager.kt
+similarity index 95%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/managers/FileManager.kt
+rename to src/main/kotlin/kr/eme/prcMoney/managers/FileManager.kt
+index 869b8f3..e95a948 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/managers/FileManager.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/managers/FileManager.kt
+@@ -1,4 +1,4 @@
+-package kr.eme.semiMoneyGlobal.managers
++package kr.eme.prcMoney.managers
+ 
+ import org.bukkit.configuration.file.YamlConfiguration
+ import java.io.File
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/managers/MoneyLogManager.kt b/src/main/kotlin/kr/eme/prcMoney/managers/MoneyLogManager.kt
+similarity index 98%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/managers/MoneyLogManager.kt
+rename to src/main/kotlin/kr/eme/prcMoney/managers/MoneyLogManager.kt
+index 7ce064f..39f00e5 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/managers/MoneyLogManager.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/managers/MoneyLogManager.kt
+@@ -1,4 +1,4 @@
+-package kr.eme.semiMoneyGlobal.managers
++package kr.eme.prcMoney.managers
+ 
+ import org.bukkit.configuration.file.YamlConfiguration
+ import java.time.LocalDateTime
+diff --git a/src/main/kotlin/kr/eme/semiMoneyGlobal/managers/MoneyManager.kt b/src/main/kotlin/kr/eme/prcMoney/managers/MoneyManager.kt
+similarity index 98%
+rename from src/main/kotlin/kr/eme/semiMoneyGlobal/managers/MoneyManager.kt
+rename to src/main/kotlin/kr/eme/prcMoney/managers/MoneyManager.kt
+index ef4cb9d..2974d18 100644
+--- a/src/main/kotlin/kr/eme/semiMoneyGlobal/managers/MoneyManager.kt
++++ b/src/main/kotlin/kr/eme/prcMoney/managers/MoneyManager.kt
+@@ -1,4 +1,4 @@
+-package kr.eme.semiMoneyGlobal.managers
++package kr.eme.prcMoney.managers
+ 
+ import kr.eme.semiMission.api.events.MissionEvent
+ import kr.eme.semiMission.enums.MissionVersion
+diff --git a/src/main/resources/plugin.yml b/src/main/resources/plugin.yml
+index 3ec4668..098abf3 100644
+--- a/src/main/resources/plugin.yml
++++ b/src/main/resources/plugin.yml
+@@ -1,5 +1,5 @@
+-name: SemiMoneyGlobal
+-main: kr.eme.semiMoneyGlobal.SemiMoneyGlobal
++name: PRCMoney
++main: kr.eme.prcMoney.PRCMoney
+ version: 1.0
+ api-version: 1.21
+ commands:

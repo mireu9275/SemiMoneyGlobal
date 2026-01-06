@@ -14,6 +14,17 @@ object MoneyCommand : CommandExecutor {
         label: String,
         args: Array<out String>
     ): Boolean {
+        if (args.size == 1 && args[0].equals("advancement", ignoreCase = true)) {
+            if (sender !is Player || !sender.isOp) {
+                sender.sendMessage("§c관리자만 이 명령어를 사용할 수 있습니다.")
+                return true
+            }
+
+            MoneyManager.doneAdvancement(sender, "module/normal/not_enough_minerals")
+            sender.sendMessage("§a[디버그] 발전 과제(not_enough_minerals) 실행을 시도했습니다.")
+            return true
+        }
+
         // 명령어가 /ep add [금액] 형태일 경우
         if (args.size == 2 && args[0].equals("add", ignoreCase = true)) {
             handleAddCommand(sender, args[1])

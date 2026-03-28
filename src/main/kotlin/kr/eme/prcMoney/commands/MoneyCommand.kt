@@ -49,11 +49,9 @@ object MoneyCommand : CommandExecutor {
         val current = MoneyManager.getMoney()
         sender.sendMessage("§a현재 보유 EP는 §e${current} EP§a 입니다.")
 
-        // 보낸 사람이 플레이어라면 개인 누적 기록도 표시
-        if (sender is Player) {
-            val myTotal = MoneyLogManager.getPlayerTotalEarned(sender.name)
-            sender.sendMessage("§7(당신의 누적 획득 EP: §f${myTotal} EP§7)")
-        }
+        // 전체 누적 획득 EP 표시
+        val totalEarned = MoneyLogManager.getTotalEarned()
+        sender.sendMessage("§7(전체 누적 획득 EP: §f${totalEarned} EP§7)")
     }
 
     /**

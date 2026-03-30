@@ -13,8 +13,8 @@ object MoneyManager {
 
     private val missionMilestones = listOf(
         25_000 to MissionVersion.V1,
-        40_000 to MissionVersion.V2,
-        60_000 to MissionVersion.V2
+        60_000 to MissionVersion.V2,
+        200_000 to MissionVersion.V2
     )
 
     /**

@@ -21,7 +21,8 @@ object CheckAPI {
         val item = ItemStack(CHEQUE_MATERIAL, quantity)
         val meta = item.itemMeta!!
         meta.setDisplayName("§f[토큰] §a${amount} §fEP")
-        meta.lore = listOf("§7우클릭으로 사용 시 EP로 환전")
+        meta.lore = listOf("§7우클릭 시 §a${amount} EP §7획득")
+        meta.setMaxStackSize(99)
         meta.setCustomModelData(CHEQUE_CMD)
         meta.persistentDataContainer.set(CHEQUE_KEY, PersistentDataType.INTEGER, amount)
         item.itemMeta = meta

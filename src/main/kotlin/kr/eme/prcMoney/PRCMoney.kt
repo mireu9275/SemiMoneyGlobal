@@ -1,5 +1,6 @@
 package kr.eme.prcMoney
 
+import kr.eme.prcMoney.commands.ChequeCommand
 import kr.eme.prcMoney.commands.MoneyCommand
 import kr.eme.prcMoney.listeners.ChequeListener
 import kr.eme.prcMoney.managers.FileManager
@@ -25,7 +26,7 @@ class PRCMoney : JavaPlugin() {
 
     private fun registerCommands() {
         getCommand("ep")?.setExecutor(MoneyCommand)
-        getCommand("cheque")?.setExecutor(MoneyCommand)
+        getCommand("token")?.setExecutor(ChequeCommand)
     }
 
     private fun registerEvents() {

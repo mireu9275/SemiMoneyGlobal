@@ -8,6 +8,6 @@ commands:
   ep:
       usage: /ep
       aliases: EP
-  cheque:
-    usage: /cheque or /수표
+  token:
+    usage: /token <금액> [수량]
     aliases: 수표

@@ -1,14 +1,11 @@
 package kr.eme.prcMoney.commands
 
-import kr.eme.prcMoney.main
-import org.bukkit.Material
-import org.bukkit.NamespacedKey
+import kr.eme.prcMoney.api.CheckAPI
+import kr.eme.prcMoney.managers.MoneyManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
-import org.bukkit.persistence.PersistentDataType
 
 object ChequeCommand : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -17,37 +14,45 @@ object ChequeCommand : CommandExecutor {
             return true
         }
 
-        if (args.size != 2) {
-            sender.sendMessage("§e사용법: /수표 <금액> <수량>")
+        if (args.isEmpty()) {
+            sender.sendMessage("§e사용법: /token <금액> [수량]")
             return true
         }
 
         val amount = args[0].toIntOrNull()
-        val quantity = args[1].toIntOrNull()
+        val quantity = if (args.size >= 2) args[1].toIntOrNull() else 1
 
-        if (amount == null || quantity == null || amount <= 0 || quantity <= 0) {
-            sender.sendMessage("§c올바른 금액과 수량을 입력해주세요.")
+        if (amount == null || amount <= 0) {
+            sender.sendMessage("§c올바른 금액을 입력해주세요.")
             return true
         }
 
-        val cheque = createCheque(amount, quantity)
+        if (quantity == null || quantity <= 0) {
+            sender.sendMessage("§c올바른 수량을 입력해주세요.")
+            return true
+        }
+
+        val totalCost = amount * quantity
+
+        // EP 잔액 확인
+        if (MoneyManager.getMoney() < totalCost) {
+            sender.sendMessage("§cEP가 부족합니다. (필요: ${totalCost} EP, 보유: ${MoneyManager.getMoney()} EP)")
+            return true
+        }
+
+        // 인벤토리 빈 칸 확인
+        if (sender.inventory.firstEmpty() == -1) {
+            sender.sendMessage("§c인벤토리에 빈 칸이 없습니다. 공간을 확보한 후 다시 시도해주세요.")
+            return true
+        }
+
+        // EP 차감
+        MoneyManager.subtractMoney(totalCost, sender)
+
+        // 수표 생성 및 지급
+        val cheque = CheckAPI.createCheque(amount, quantity)
         sender.inventory.addItem(cheque)
-        sender.sendMessage("§a수표를 발급했습니다: ${amount} EP × $quantity")
+        sender.sendMessage("§a수표를 발급했습니다: §e${amount} EP §f× §e${quantity}장 §7(총 ${totalCost} EP 차감)")
         return true
-    }
-
-    private fun createCheque(amount: Int, quantity: Int): ItemStack {
-        val item = ItemStack(Material.PAPER, quantity)
-        val meta = item.itemMeta!!
-        meta.setDisplayName("§f[수표] §a$amount §fEP")
-        meta.lore = listOf("§7우클릭으로 사용 시 EP 지급")
-
-        val container = meta.persistentDataContainer
-        val key = NamespacedKey(main, "cheque_amount")
-        container.set(key, PersistentDataType.INTEGER, amount)
-
-        meta.setCustomModelData(1001) // 수표 전용 모델 ID (리소스팩 사용 시)
-        item.itemMeta = meta
-        return item
     }
 }

@@ -20,8 +20,8 @@ object CheckAPI {
     fun createCheque(amount: Int, quantity: Int = 1): ItemStack {
         val item = ItemStack(CHEQUE_MATERIAL, quantity)
         val meta = item.itemMeta!!
-        meta.setDisplayName("§f[수표] §a${amount} §fEP")
-        meta.lore = listOf("§7우클릭으로 사용 시 EP 지급")
+        meta.setDisplayName("§f[토큰] §a${amount} §fEP")
+        meta.lore = listOf("§7우클릭으로 사용 시 EP로 환전")
         meta.setCustomModelData(CHEQUE_CMD)
         meta.persistentDataContainer.set(CHEQUE_KEY, PersistentDataType.INTEGER, amount)
         item.itemMeta = meta

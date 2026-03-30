@@ -19,7 +19,7 @@ object ChequeListener : Listener {
 
         val player = event.player
         MoneyManager.addMoney(amount, "CHEQUE_USE", player.name)
-        player.sendMessage("§a수표를 사용하여 §e${amount} EP§a를 획득했습니다.")
+        player.sendMessage("§a토큰을 사용하여 §e${amount} EP§a를 획득했습니다.")
 
         item.amount -= 1
     }

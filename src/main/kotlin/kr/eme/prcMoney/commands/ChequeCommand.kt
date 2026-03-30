@@ -19,6 +19,11 @@ object ChequeCommand : CommandExecutor {
             return true
         }
 
+        if (args[0] == "?" || args[0] == "help") {
+            sender.sendMessage("§e사용법: /token <금액> [수량]")
+            return true
+        }
+
         val amount = args[0].toIntOrNull()
         val quantity = if (args.size >= 2) args[1].toIntOrNull() else 1
 
@@ -52,7 +57,7 @@ object ChequeCommand : CommandExecutor {
         // 수표 생성 및 지급
         val cheque = CheckAPI.createCheque(amount, quantity)
         sender.inventory.addItem(cheque)
-        sender.sendMessage("§a수표를 발급했습니다: §e${amount} EP §f× §e${quantity}장 §7(총 ${totalCost} EP 차감)")
+        sender.sendMessage("§a토큰을 발급했습니다: §e${amount} EP §f× §e${quantity}장 §7(총 ${totalCost} EP 차감)")
         return true
     }
 }

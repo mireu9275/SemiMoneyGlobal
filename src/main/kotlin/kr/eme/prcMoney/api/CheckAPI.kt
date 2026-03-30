@@ -8,8 +8,8 @@ import org.bukkit.persistence.PersistentDataType
 
 object CheckAPI {
 
-    private val CHEQUE_MATERIAL = Material.ORANGE_DYE
-    private const val CHEQUE_CMD = 5
+    private val CHEQUE_MATERIAL = Material.SADDLE
+    private const val CHEQUE_CMD = 38
     private val CHEQUE_KEY get() = NamespacedKey(main, "cheque_amount")
 
     /**

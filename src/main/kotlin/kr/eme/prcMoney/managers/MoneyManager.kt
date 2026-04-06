@@ -94,7 +94,7 @@ object MoneyManager {
 
         if (playerObj == null || !playerObj.isOnline) return
 
-        val currentTotalEarned = MoneyLogManager.getPlayerTotalEarned(player)
+        val currentTotalEarned = MoneyLogManager.getTotalEarned()
 
         val previousTotalEarned = currentTotalEarned - amount
 

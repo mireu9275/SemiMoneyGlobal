@@ -4,6 +4,7 @@ import kr.eme.prcMission.api.events.MissionEvent
 import kr.eme.prcMission.enums.MissionVersion
 import kr.eme.prcMission.objects.const.MissionTargets
 import kr.eme.prcMission.objects.const.MissionTypes
+import kr.eme.prcMoney.api.events.MoneyChangedEvent
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
@@ -27,6 +28,7 @@ object MoneyManager {
      */
     fun addMoney(amount: Int) {
         money += amount
+        fireChanged(null, amount, "ADD")
     }
 
     /**
@@ -45,6 +47,7 @@ object MoneyManager {
             doneAdvancement(player, "module/normal/not_enough_minerals")
         }
 
+        fireChanged(player, -amount, "SUBTRACT")
         return true
     }
 
@@ -91,6 +94,7 @@ object MoneyManager {
         MoneyLogManager.log(player, type, amount) //
 
         val playerObj = Bukkit.getPlayer(player)
+        fireChanged(playerObj, amount, type)
 
         if (playerObj == null || !playerObj.isOnline) return
 
@@ -111,5 +115,15 @@ object MoneyManager {
                 )
             }
         }
+    }
+
+    /**
+     * 잔액 변경 사실을 Bukkit 이벤트로 발행.
+     * 다른 플러그인(PRCMission HUD 등)이 리스너로 구독해 사용한다.
+     */
+    private fun fireChanged(player: Player?, delta: Int, type: String) {
+        Bukkit.getPluginManager().callEvent(
+            MoneyChangedEvent(player, delta, money, type)
+        )
     }
 }
